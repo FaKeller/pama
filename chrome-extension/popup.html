@@ -3,11 +3,14 @@
   <head>
     <title>PAMA</title>
     <script src="jquery-2.1.3.min.js"></script>
+    <script src="sjcl-0.8.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
-    <span>Current URL:</span>
-    <input type="text" id="siteUrl" class="form-control" />
+    <span>Your password:</span>
+    <input type="text" id="yourPassword" class="form-control" />
+    <input type="button" id="generateBtn" value="Generate!" />
+    <p id="generatedPassword"></p>
   </body>
 </html>
 
