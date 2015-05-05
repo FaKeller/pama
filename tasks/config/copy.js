@@ -32,6 +32,11 @@ module.exports = function (grunt) {
                 cwd: './lib',
                 src: ['**/*.!(coffee|less)'],
                 dest: 'chrome-extension/lib'
+            },{
+                expand: true,
+                cwd: './node_modules/jssha/src',
+                src: ['sha.js'],
+                dest: '.tmp/public/node_modules'
             }]
         },
         build: {
