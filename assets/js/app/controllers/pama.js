@@ -5,13 +5,37 @@ pamaApp.controller('IndexController', function ($scope) {
     $scope.domain = "http://www.google.de/";
 
     $scope.$watch('masterPassword', function () {
-        $scope.prefix = secureSecret($scope.masterPassword, $scope.domain);
+        updateSecret();
     }, true);
 
     $scope.$watch('domain', function () {
-        var matches = $scope.domain.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
-        var domain = matches && matches[1];
+        updateSecret();
+    }, true);
+
+    function updateSecret() {
+        var domain = getDomainName($scope.domain);
         console.log(domain);
         $scope.prefix = secureSecret($scope.masterPassword, domain);
-    }, true);
+    }
+
+    function getDomainName(hostName) {
+        //var matches = hostName.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
+        var matches = hostName.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)(\/[^?#]*)(\?[^#]*|)(#.*|)$/);
+        //var domain = matches && matches[1];
+        var domain = matches[2];
+
+        console.log(matches);
+
+        //domain = domain.substring(domain.lastIndexOf(".", domain.lastIndexOf(".") - 1) + 1);
+
+        /*
+        var domainArray = domain.split(".");
+        if(1 <= domainArray.length <= 2){
+            domain = domainArray[0];
+        }
+        */
+
+        return domain;
+    }
+
 });
